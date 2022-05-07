@@ -70,10 +70,11 @@ const gameController = (() => {
   let gameOver = false;
 
   const playRound = (index) => {
-    if (!gameController.emptyField(index)) return;
+    if (!gameController.emptyField(index) || gameOver) return;
     gameBoard.setField(index,getCurrentPlayerSign());
     if (gameController.checkWinner(index)){
-      console.log("Oops");
+      gameOver = true;
+      console.log("asdf")
     }
     round += 1;
   }
