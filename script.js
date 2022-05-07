@@ -1,13 +1,12 @@
-
 const Player = (sign) => {
   this.sign = sign;
 
   const getSign = () => {
-    return this.sign;
-  }
+    return sign;
+  };
 
   return {getSign};
-}
+};
 
 const gameBoard = (() => {
   const board = ["","","","","","","","",""];
@@ -44,7 +43,7 @@ const displayController = (() => {
   gridEle.forEach((ele) =>
 
     ele.addEventListener("click",(e) =>{
-      gameBoard.setField(e.target.dataset.index,"X");
+      gameController.playRound(e.target.dataset.index);
       updateGameboard();
     }))
 
@@ -60,6 +59,28 @@ const displayController = (() => {
   }
 
   return {updateGameboard};
+})();
+
+
+
+const gameController = (() => {
+  const playerX = Player("X");
+  const playerO = Player("O");
+  let round = 0;
+  let gameOver = false;
+
+  const playRound = (index) => {
+    let currentSign;
+    if (round % 2 == 0){
+      currentSign = playerX.getSign();
+    }else{
+      currentSign = playerO.getSign();
+    }
+    gameBoard.setField(index,currentSign);
+    round += 1;
+  }
+
+  return {playRound};
 })();
 
 displayController.updateGameboard();
