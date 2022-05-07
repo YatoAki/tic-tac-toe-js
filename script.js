@@ -61,7 +61,10 @@ const displayController = (() => {
   }
 
   const showMessage = () => {
-    if (gameController.isOver()){
+    if (gameController.isDraw()){
+      mark.textContent = "IT IS DRAW!";
+    }
+    else if (gameController.isOver()){
       mark.textContent = gameController.getCurrentPlayerSign() + " WIN!";
     }else{
       let nextPlayer = gameController.getCurrentPlayerSign() == "X" ? "O" : "X";
@@ -79,6 +82,7 @@ const gameController = (() => {
   const playerO = Player("O");
   let round = 0;
   let gameOver = false;
+  let draw = false;
 
   const playRound = (index) => {
     if (!gameController.emptyField(index) || gameOver) return;
@@ -86,6 +90,10 @@ const gameController = (() => {
     displayController.showMessage();
     if (checkWinner(index)){
       gameOver = true;
+      displayController.showMessage();
+    }
+    if (round >= 8){
+      draw = true;
       displayController.showMessage();
     }
     round += 1;
@@ -135,5 +143,9 @@ const gameController = (() => {
     return gameOver;
   }
 
-  return {playRound,emptyField,isOver,reset,getCurrentPlayerSign};
+  const isDraw = () => {
+    return draw;
+  }
+
+  return {playRound,emptyField,isOver,isDraw,reset,getCurrentPlayerSign};
 })();
