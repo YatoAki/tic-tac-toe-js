@@ -50,6 +50,7 @@ const displayController = (() => {
   action.addEventListener("click", (e) =>{
     gameBoard.reset();
     gameController.reset();
+    removeAnimation();
     mark.textContent = "";
     updateGameboard();
   })
@@ -63,13 +64,36 @@ const displayController = (() => {
   const showMessage = () => {
     if (gameController.isDraw()){
       mark.textContent = "IT IS DRAW!";
+      addDrawAnimation();
     }
     else if (gameController.isOver()){
       mark.textContent = gameController.getCurrentPlayerSign() + " WIN!";
+      addWinAnimation();
     }else{
       let nextPlayer = gameController.getCurrentPlayerSign() == "X" ? "O" : "X";
       mark.textContent =  nextPlayer + " TURN";
     }
+  }
+
+  const addWinAnimation = () => {
+    gridEle.forEach((ele) => ele.classList.add("turn-green"))
+  }
+
+  const removeWinAnimation = () => {
+    gridEle.forEach((ele) => ele.classList.remove("turn-green"))
+  }
+
+  const addDrawAnimation = () => {
+    gridEle.forEach((ele) => ele.classList.add("turn-red"))
+  }
+
+  const removeDrawAnimation = () => {
+    gridEle.forEach((ele) => ele.classList.remove("turn-red"))
+  }
+
+  const removeAnimation = () => {
+    removeWinAnimation();
+    removeDrawAnimation();
   }
 
   return {updateGameboard,showMessage};

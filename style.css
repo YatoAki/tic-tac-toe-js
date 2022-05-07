@@ -98,3 +98,13 @@ footer a{
 #action:hover{
   transform: scale(1.03);
 }
+
+.turn-green{
+  background-color: var(--light-green);
+  color: white;
+}
+
+.turn-red{
+  background-color: var(--light-red);
+  color: white;
+}
