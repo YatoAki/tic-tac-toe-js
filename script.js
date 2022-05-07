@@ -49,6 +49,7 @@ const displayController = (() => {
 
   action.addEventListener("click", (e) =>{
     gameBoard.reset();
+    gameController.reset();
     updateGameboard();
   })
 
@@ -74,7 +75,6 @@ const gameController = (() => {
     gameBoard.setField(index,getCurrentPlayerSign());
     if (gameController.checkWinner(index)){
       gameOver = true;
-      console.log("asdf")
     }
     round += 1;
   }
@@ -87,6 +87,11 @@ const gameController = (() => {
       currentSign = playerO.getSign();
     }
     return currentSign;
+  }
+
+  const reset = () => {
+    gameOver = false;
+    round = 0;
   }
 
   const emptyField = (index) =>{
@@ -114,5 +119,5 @@ const gameController = (() => {
       );
   };
 
-  return {playRound,emptyField,checkWinner};
+  return {playRound,emptyField,checkWinner,reset};
 })();
