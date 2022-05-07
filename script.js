@@ -43,7 +43,7 @@ const displayController = (() => {
   gridEle.forEach((ele) =>
 
     ele.addEventListener("click",(e) =>{
-      gameController.playRound(e.target.dataset.index);
+      gameController.playRound(parseInt(e.target.dataset.index));
       updateGameboard();
     }))
 
@@ -70,19 +70,48 @@ const gameController = (() => {
   let gameOver = false;
 
   const playRound = (index) => {
+    if (!gameController.emptyField(index)) return;
+    gameBoard.setField(index,getCurrentPlayerSign());
+    if (gameController.checkWinner(index)){
+      console.log("Oops");
+    }
+    round += 1;
+  }
+
+  const getCurrentPlayerSign = () => {
     let currentSign;
     if (round % 2 == 0){
       currentSign = playerX.getSign();
     }else{
       currentSign = playerO.getSign();
     }
-    gameBoard.setField(index,currentSign);
-    round += 1;
+    return currentSign;
   }
 
   const emptyField = (index) =>{
     return (gameBoard.getField(index) === "");
   }
 
-  return {playRound,emptyField};
+  const checkWinner = (fieldIndex) => {
+    const winConditions = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+
+    return winConditions
+      .filter((combination) => combination.includes(fieldIndex))
+      .some((possibleCombination) =>
+        possibleCombination.every(
+          (index) => gameBoard.getField(index) === getCurrentPlayerSign()
+        )
+      );
+  };
+
+  return {playRound,emptyField,checkWinner};
 })();
