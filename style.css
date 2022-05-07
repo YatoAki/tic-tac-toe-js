@@ -4,12 +4,14 @@
   --light-pink: #D9B8C4;
   --dark-pink: #957186;
   --violet: #3A1772;
+  --light-green: #9fff9c;
+  --light-red: #ff9c9c;
 }
 
 html,body{
   margin: 0;
   padding: 0;
-  background-color: var(--light-yellow);
+  background-color: var(--light-blue);
   font-family: 'VT323', monospace;
   color: var(--violet);
 }
@@ -25,6 +27,7 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 }
 
 /* Grid */
@@ -53,4 +56,17 @@ body{
 .mark{
   padding: 20px;
   font-size: 30px;
+}
+
+.flex-grow{
+  flex-grow: 1;
+}
+
+footer{
+  padding: 10px;
+}
+
+footer a{
+  text-decoration: none;
+  color: inherit;
 }
