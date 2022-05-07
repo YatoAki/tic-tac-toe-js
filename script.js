@@ -22,11 +22,44 @@ const gameBoard = (() => {
     return board[index];
   };
 
-  const resetField = () => {
+  const reset = () => {
     for (let i = 0; i < board.length ; i++){
       board[i] = "";
     }
   };
 
-  return {setField, getField, resetField};
+  return {setField, getField, reset};
 })();
+
+
+const displayController = (() => {
+  const gridEle = document.querySelectorAll(".grid-ele");
+  const mark = document.querySelector(".mark");
+  const action = document.querySelector("#action");
+
+  for (let i = 0 ; i < gridEle.length; i++){
+    gridEle[i].dataset.index = i;
+  }
+
+  gridEle.forEach((ele) =>
+
+    ele.addEventListener("click",(e) =>{
+      gameBoard.setField(e.target.dataset.index,"X");
+      updateGameboard();
+    }))
+
+  action.addEventListener("click", (e) =>{
+    gameBoard.reset();
+    updateGameboard();
+  })
+
+  const updateGameboard = () =>{
+    for (let i = 0 ; i < gridEle.length; i++){
+      gridEle[i].textContent = gameBoard.getField(i);
+    }
+  }
+
+  return {updateGameboard};
+})();
+
+displayController.updateGameboard();
