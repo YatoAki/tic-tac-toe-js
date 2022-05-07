@@ -12,7 +12,7 @@ const gameBoard = (() => {
   const board = ["","","","","","","","",""];
 
   const setField = (index, sign) => {
-    if (index > board.length || index < 0) return;
+    if (index > board.length || index < 0 || !gameController.emptyField(index)) return;
     board[index] = sign;
   };
 
@@ -80,7 +80,9 @@ const gameController = (() => {
     round += 1;
   }
 
-  return {playRound};
-})();
+  const emptyField = (index) =>{
+    return (gameBoard.getField(index) === "");
+  }
 
-displayController.updateGameboard();
+  return {playRound,emptyField};
+})();
