@@ -50,6 +50,7 @@ const displayController = (() => {
   action.addEventListener("click", (e) =>{
     gameBoard.reset();
     gameController.reset();
+    mark.textContent = "";
     updateGameboard();
   })
 
@@ -59,7 +60,16 @@ const displayController = (() => {
     }
   }
 
-  return {updateGameboard};
+  const showMessage = () => {
+    if (gameController.isOver()){
+      mark.textContent = gameController.getCurrentPlayerSign() + " WIN!";
+    }else{
+      let nextPlayer = gameController.getCurrentPlayerSign() == "X" ? "O" : "X";
+      mark.textContent =  nextPlayer + " TURN";
+    }
+  }
+
+  return {updateGameboard,showMessage};
 })();
 
 
@@ -73,8 +83,10 @@ const gameController = (() => {
   const playRound = (index) => {
     if (!gameController.emptyField(index) || gameOver) return;
     gameBoard.setField(index,getCurrentPlayerSign());
-    if (gameController.checkWinner(index)){
+    displayController.showMessage();
+    if (checkWinner(index)){
       gameOver = true;
+      displayController.showMessage();
     }
     round += 1;
   }
@@ -119,5 +131,9 @@ const gameController = (() => {
       );
   };
 
-  return {playRound,emptyField,checkWinner,reset};
+  const isOver =() => {
+    return gameOver;
+  }
+
+  return {playRound,emptyField,isOver,reset,getCurrentPlayerSign};
 })();
