@@ -30,6 +30,16 @@ body{
   height: 100vh;
 }
 
+button{
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
 /* Grid */
 
 
@@ -44,11 +54,12 @@ body{
 
 .grid-ele{
   background-color: white;
-  transition: filter 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 
 .grid-ele:hover{
   filter: brightness(87%);
+  transform: scale(1.01);
 }
 
 /* Marks */
@@ -69,4 +80,15 @@ footer{
 footer a{
   text-decoration: none;
   color: inherit;
+}
+
+#action{
+  padding: 10px 40px;
+  border-radius: 10px;
+  border: none;
+  transition: all 0.1s ease-out;
+}
+
+#action:hover{
+  transform: scale(1.03);
 }
