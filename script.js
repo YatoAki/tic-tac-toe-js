@@ -111,6 +111,7 @@ const gameController = (() => {
 
   const reset = () => {
     gameOver = false;
+    draw = false;
     round = 0;
   }
 
