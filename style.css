@@ -54,7 +54,13 @@ button{
 
 .grid-ele{
   background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--dark-pink);
+  font-size: 100px;
   transition: all 0.1s ease-in-out;
+  cursor: pointer;
 }
 
 .grid-ele:hover{
