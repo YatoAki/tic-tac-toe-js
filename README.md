@@ -2,6 +2,10 @@
 
 Classic Tic-Tac-Toe Game created with Html, Css & JavaScript
 
+## Features
+
+* Play with friends - 1 vs 1
+
 ## How to run the game
 
 ### Through the GitHub page
